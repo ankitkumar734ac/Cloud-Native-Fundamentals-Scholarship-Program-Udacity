@@ -1,5 +1,6 @@
 # Cloud-Native-Fundamentals-Scholarship-Program-Udacity
-
+     Monolith: application design where all application tiers are managed as a single unit
+     Microservice: application design where application tiers are managed as independent, smaller units
 
 # Introduction to Cloud-Native
 Cloud-native refers to the set of practices that empowers an organization to build and manage applications at scale. They can achieve this goal by using private, hybrid, or public cloud providers. In addition to scale, an organization needs to be agile in integrating customer feedback and adapting to the surrounding technology ecosystem.
@@ -111,8 +112,14 @@ Reliability captures practices for an application to recover from failure and to
 + Monoliths - in a failure scenario, the entire stack needs to be recovered. Also, the visibility into each functionality is low, since all the logs and metrics are aggregated together.
 + Microservice - in a failure scenario, only the failed unit needs to be recovered. Also, there is high visibility into the logs and metrics for each unit.
  
- 
- 
+ # Edge Case: Amorphous Applications
+ Some of the most encountered operations in the maintenance phase are listed below:
+<img width="709" alt="screenshot-2020-12-19-at-13 28 38" src="https://user-images.githubusercontent.com/71343747/123729065-02f01980-d8b2-11eb-87d4-939d48e583ce.png">
++ A split operation - is applied if a service covers too many functionalities and it's complex to manage. Having smaller, manageable units is preferred in this context.
++ A merge operation- is applied if units are too granular or perform closely interlinked operations, and it provides a development advantage to merge these together. For example, merging 2 separate services for log output and log format in a single service.
++ A replace operation - is adopted when a more efficient implementation is identified for a service. For example, rewriting a Java service in Go, to optimize the overall execution time.
++ A stale operation - is performed for services that are no longer providing any business value, and should be archived or deprecated. For example, services that were used to perform a one-off migration process.
+ Performing any of these operations increases the longevity and continuity of a project. Overall, the end goal is to ensure the application is providing value to customers and is easy to manage by the engineering team. But more importantly, it can be observed that the structure of a project is not static. It amorphous and it evolves based on new requirements and customer feedback.
  
  
  
