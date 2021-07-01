@@ -123,6 +123,7 @@ Reliability captures practices for an application to recover from failure and to
  
  # Transitions from VMs to Containers
  <img width="388" alt="screenshot-2020-12-19-at-17 29 28" src="https://user-images.githubusercontent.com/71343747/124047957-eb8c6a00-da32-11eb-9245-79655a77c76e.png">
+
 # VMs
 In the past years, VMs (Virtual Machines) were the main mechanism to host an application. VMs encapsulate the code, configuration files, and dependencies necessary to execute the application.
 In essence, a VM is composed of an operating system (OS) with a set of pre-installed libraries and packages. During execution, an application utilizes an OS filesystem, resources, and packages.
@@ -139,6 +140,7 @@ Multiple VMs on a hypervisor are replaced by multiple containers running on a si
 The appearance of containers is unlocked by OS-level virtualization and as a result, multiple applications can run on the same OS. By nature, containers are lightweight, as these encapsulate only the application code and essential dependencies. Consequently, there is a better usage of available infrastructure and a more efficient pathway to release a product to consumers.
 # Docker for Application Packaging
 To containerize an application using Docker, 3 main components are distinguished: Dockerfiles, Docker images, and Docker registries
+
 ## Dockerfile
 A Dockerfile is a set of instructions used to create a Docker image. Each instruction is an operation used to package the application, such as installing dependencies, compile the code, or impersonate a specific user. A Docker image is composed of multiple layers, and each layer is represented by an instruction in the Dockerfile. All layers are cached and if an instruction is modified, then during the build process only the changed layer will be rebuild. As a result, building a Docker image using a Dockerfile is a lightweight and quick process.
 To construct a Dockerfile, it is necessary to use the pre-defined instructions, such as:
@@ -147,9 +149,8 @@ FROM -  to set the base image
 RUN - to execute a command
 COPY & ADD  - to copy files from host to the container
 CMD - to set the default command to execute when the container starts
-EXPOSE - to expose an application port ```
-
-
+EXPOSE - to expose an application port 
+```
 Below is an example of a Dockerfile that targets to package a Python hello-world application:
 ```sh
 # set the base image. Since we're running 
@@ -195,11 +196,11 @@ docker build --help
 docker build -t python-helloworld .
 
 # build an image using the Dockerfile from the `lesson1/python-app` directory
-docker build -t python-helloworld lesson1/python-app```
- 
- Before distributing the Docker image to a wider audience, it is paramount to test it locally and verify if it meets the expected behavior. To create a container using an available Docker image, the <b>docker run</> command is available. Below is the syntax for this command:
+docker build -t python-helloworld lesson1/python-app
+```
+Before distributing the Docker image to a wider audience, it is paramount to test it locally and verify if it meets the expected behavior. To create a container using an available Docker image, the <b>docker run</> command is available. Below is the syntax for this command:
 ```sh
-     # execute an image
+# execute an image
 # OPTIONS - optional;  define extra configuration
 # IMAGE -  required; provides the name of the image to be executed
 # COMMAND and ARGS - optional; instruct the container to run specific commands when it starts 
@@ -229,15 +230,15 @@ docker logs 95173091eb5e
    WARNING: This is a development server. Do not use it in a production deployment.
    Use a production WSGI server instead.
  * Debug mode: off     
-  ```  
+ ```  
  # Docker Registry
  The last step in packaging an application using Docker is to store and distribute it. So far, we have built and tested an image on the local machine, which does not ensure that other engineers have access to it. As a result, the image needs to be pushed to a public Docker image registry, such as DockerHub, Harbor, Google Container Registry, and many more. However, there might be cases where an image should be private and only available to trusted parties. As a result, a team can host private image registries, which provides full control over who can access and execute the image.
 
 Before pushing an image to a Docker registry, it is highly recommended to tag it first. During the build stage, if a tag is not provided (via the -t or --tag flag), then the image would be allocated an ID, which does not have a human-readable format (e.g. 0e5574283393). On the other side, a defined tag is easily scalable by the human eye, as it is composed of a registry repository, image name, and version. Also, a tag provides version control over application releases, as a new tag would indicate a new release.
 
 To tag an existing image on the local machine, the docker tag command is available. Below is the syntax for this command:
- ``sh
-     # tag an image
+ ```sh
+# tag an image
 # SOURCE_IMAGE[:TAG]  - required and the tag is optional; define the name of an image on the current machine 
 # TARGET_IMAGE[:TAG] -  required and the tag is optional; define the repository, name, and version of an image
 docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
@@ -247,17 +248,20 @@ For example, to tag the Python hello-world application, to be pushed to a reposi
 # tag the `python-helloworld` image, to be pushed 
 # in the `pixelpotato` repository, with the `python-helloworld` image name
 # and version `v1.0.0`
-docker tag python-helloworld pixelpotato/python-helloworld:v1.0.0```
+docker tag python-helloworld pixelpotato/python-helloworld:v1.0.0
+```
 Once the image is tagged, the final step is to push the image to a registry. For this purpose, the docker push command can be used. Below is the syntax for this command:
 ```sh
 # push an image to a registry 
 # NAME[:TAG] - required and the tag is optional; name, set the image name to be pushed to the registry
-docker push NAME[:TAG]```
+docker push NAME[:TAG]
+```
 For example, to push the Python hello-world application to DockerHub, the following command can be used:
 ```sh
 # push the `python-helloworld` application in version v1.0.0 
 # to the `pixelpotato` repository in DockerHub
-docker push pixelpotato/python-helloworld:v1.0.0```
+docker push pixelpotato/python-helloworld:v1.0.0
+```
 # New terms
 <b>Docker file<b/> - set of instructions used to create a Docker image
 <b>Docker image<b/> - a read-only template used to spin up a runnable instance of an application
@@ -273,51 +277,51 @@ Note: In the following commands the following arguments are used:
 + COMMAND and ARG - instruct the container to run specific commands associated with a set of arguments
 ## Build Images
 To build an image, use the following command, where PATH sets the location of the Dockerfile and referenced application files:
-``sh
+```sh
  docker build [OPTIONS] PATH
-     ```
+```
 ## Run Images
 To run an image, use the following command:
 ```sh
 docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
-     ```
+```
 ## Get Logs
 To get the logs from a Docker container, use the following command:
 ```sh
 docker logs CONTAINER_ID
-     ```
+ ```
 Where the CONTAINER_ID is the ID of the Docker container that runs an application.
 
 ## List Images
 To list all available images, use the following command:
 ```sh
 docker images
-     ```
+ ```
 ### List Containers
 To list all running containers, use the following command:
 ```sh
 docker ps
-     ```
+ ```
 ## Tag Images
 To tag an image, use the following command, where SOURCE_IMAGE defines the name of an image on the current machine and TARGET_IMAGE defines the repository, name, and version of an image:
 ```sh
 docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
-     ```
+```
 ## Login to DockerHub
 To login into DockerHub, use the following command:
 ```sh
 docker login
-     ```
+```
 ## Push Images
 To push an image to DockerHub, use the following command:
 ```sh
 docker push NAME[:TAG]
-     ```
+```
 ## Pull Images
 To pull an image from DockerHub, use the following command:
 ```sh
 docker pull NAME[:TAG] 
- ```
+```
 
  
   
