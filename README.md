@@ -175,7 +175,7 @@ CMD [ "python", "app.py" ]
 
 Once a Dockerfile is constructed, these instructions are used to build a Docker image. A Docker image is a read-only template that enables the creation of a runnable instance of an application. In a nutshell, a Docker image provides the execution environment for an application, including any essential code, config files, and dependencies.
 
-A Docker image can be built from an existing Dockerfile using the<b> docker build<b/> command. Below is the syntax for this command:
+A Docker image can be built from an existing Dockerfile using the<b> docker build</b> command. Below is the syntax for this command:
 ```sh
 # build an image
 # OPTIONS - optional;  define extra configuration
@@ -198,7 +198,7 @@ docker build -t python-helloworld .
 # build an image using the Dockerfile from the `lesson1/python-app` directory
 docker build -t python-helloworld lesson1/python-app
 ```
-Before distributing the Docker image to a wider audience, it is paramount to test it locally and verify if it meets the expected behavior. To create a container using an available Docker image, the <b>docker run</> command is available. Below is the syntax for this command:
+Before distributing the Docker image to a wider audience, it is paramount to test it locally and verify if it meets the expected behavior. To create a container using an available Docker image, the <b>docker run</b> command is available. Below is the syntax for this command:
 ```sh
 # execute an image
 # OPTIONS - optional;  define extra configuration
@@ -263,9 +263,9 @@ For example, to push the Python hello-world application to DockerHub, the follow
 docker push pixelpotato/python-helloworld:v1.0.0
 ```
 # New terms
-<b>Docker file<b/> - set of instructions used to create a Docker image
-<b>Docker image<b/> - a read-only template used to spin up a runnable instance of an application
-<b>Docker registry <b/>- a central mechanism to store and distribute Docker images
+<b>Docker file</b> - set of instructions used to create a Docker image
+<b>Docker image</b> - a read-only template used to spin up a runnable instance of an application
+<b>Docker registry </b>- a central mechanism to store and distribute Docker images
  # Summary
 Docker provides a rich set of actions that can be used to build, run, tag, and push images. Below is a list of handy Docker commands used in practice.
 
